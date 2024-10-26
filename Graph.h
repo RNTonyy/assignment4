@@ -3,6 +3,7 @@
 #include <fstream>
 #include <boost/graph/compressed_sparse_row_graph.hpp>
 #include <boost/property_map/property_map.hpp>
+#include <boost/graph/graph_traits.hpp>
 
 
 //.h define the class we want
@@ -40,20 +41,13 @@ namespace tony {
     class Graph {
         //variable BoostCSR will be an alias for this long complicated
         using BoostCSR = boost::compressed_sparse_row_graph<boost::directedS, NodeLabel, boost::property<boost::edge_weight_t, int>>;
-        
-        // /** NOTE: COO will be it's own data structure with COO entry */
-        // struct CSR {
-        //     std::vector<int> row_ptrs;
-        //     std::vector<int> column_idx;
-        //     std::vector<int> values;
-        // };
+        using Vertex = boost::graph_traits<BoostCSR>::vertex_descriptor;
 
     private:
         //fields
         int num_edges;
         int num_nodes;
         BoostCSR csr;
-        // CSR csr;
     
     
     public:
@@ -73,9 +67,6 @@ namespace tony {
 
         //destructor
         ~Graph();
-
-        //methods
-    
         
         /**
             INPUT: src node ID, dest node ID
@@ -86,24 +77,11 @@ namespace tony {
         void add_edge(int src, int dest, int val);
 
         /**
-            INPUT: src node ID, dest node ID
-            OUTPUT: return nothing, but update value if > old_val
+         * INPUT: src node (row ptr), and a new label
+         * OUTPUT: label gets updated, old label is returned
          */
-
-        int update_edge(int src, int label, int dest, int new_val);
+        int update_label(int src, int label);
         
-        
-        /**
-            INPUT: COO storage
-            OUTPUT: Initializes CSR with values
-         */
-        
-        //static method gets called and creates a Graph object
-
-        //
-
-
-
     }; 
  };
 
