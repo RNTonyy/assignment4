@@ -1,0 +1,24 @@
+{
+  "build": {
+    "dockerfile": "Dockerfile",
+    "context": "..",
+    "args": {
+      "platform": "arm64"
+      // map dev/snd from host computer to tmp/music.input
+      // alsa program doesn't have access to dev dir, but it does have access to tmp
+      // music.input is default sink, connected via tcb to host machine
+    }
+  },
+
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-vscode.cpptools",
+        "ms-vscode.makefile-tools",
+        "GitHub.copilot"
+      ]
+    }
+  },
+  "features": {"git": "os-provided"},
+  "onCreateCommand": "./.devcontainer/onCreateCommand.sh"
+}
