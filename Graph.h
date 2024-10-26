@@ -1,6 +1,8 @@
 #include <iostream>
 #include <vector>
 #include <fstream>
+#include <boost/graph/compressed_sparse_row_graph.hpp>
+#include <boost/property_map/property_map.hpp>
 
 
 //.h define the class we want
@@ -29,24 +31,29 @@
 
     
   */
+namespace tony {
+    struct NodeLabel {
+        int label;
+    };
 
 
- namespace tony {
     class Graph {
-
-        /** NOTE: COO will be it's own data structure with COO entry */
-        struct CSR {
-            std::vector<int> row_ptrs;
-            std::vector<int> column_idx;
-            std::vector<int> values;
-        };
+        //variable BoostCSR will be an alias for this long complicated
+        using BoostCSR = boost::compressed_sparse_row_graph<boost::directedS, NodeLabel, boost::property<boost::edge_weight_t, int>>;
+        
+        // /** NOTE: COO will be it's own data structure with COO entry */
+        // struct CSR {
+        //     std::vector<int> row_ptrs;
+        //     std::vector<int> column_idx;
+        //     std::vector<int> values;
+        // };
 
     private:
         //fields
         int num_edges;
         int num_nodes;
-        std::string format;
-        CSR csr;
+        BoostCSR csr;
+        // CSR csr;
     
     
     public:
@@ -55,7 +62,7 @@
             INPUT: fstream
             OUTPUT: Graph object with populated COO
          */
-        Graph();   
+        Graph(int num_nodes, int num_edges);   
         /*
             Plan for how to create COO
 
@@ -73,6 +80,8 @@
         /**
             INPUT: src node ID, dest node ID
             OUTPUT: return nothing, but replace value in COO with VAL
+
+            NOTE: for now let the label be -1
          */
         void add_edge(int src, int dest, int val);
 
@@ -81,18 +90,8 @@
             OUTPUT: return nothing, but update value if > old_val
          */
 
-        int update_edge(int src, int dest, int new_val);
+        int update_edge(int src, int label, int dest, int new_val);
         
-        /**
-            INPUT:
-            OUTPUT: 
-         */
-
-         /***
-
-          */
-        
-        void create_csr();
         
         /**
             INPUT: COO storage

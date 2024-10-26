@@ -1,4 +1,3 @@
 #include <iostream>
-
-
-//Send dimacs input into DimacIO function "createGraph"
+#include "Graph.h"
+#include "DimacIO.h"

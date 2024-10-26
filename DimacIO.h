@@ -1,5 +1,7 @@
 #include <iostream>
 #include <fstream>
+#include <string.h>
+#include "Graph.h"
 
 /**
     READ:
@@ -7,7 +9,6 @@
     2) call constructor for Graph() passing in metadata
     3) loop through line by line and add edges to CSR
     4) return Graph
-
 
     WRITE: DIMAC
     1) be given a string file path and make a file write object (fstream)
@@ -30,11 +31,27 @@
         - How are we supposed to format the non-DIMACS
         - For finished PageRank, node labels will have rankings rather than weights now
 
-        - std::cout << "NODE# PageRank"
-            
-    
-        
+        - std::cout << "NODE# PageRank"   
  */
+
+
+/**
+ * INPUT: string filepath of dimac file to read from
+ * OUTPUT: complete Graph with filled CRS
+ */
+tony::Graph dimac_read(std::string fp);
+
+/**
+ * INPUT: string directory path to write to, and the completed graph with CRS
+ * OUTPUT: void, should write the CRS in Dimac form for sanity check
+ */
+void dimac_write(std::string fp, tony::Graph g);
+
+/**
+ * INPUT: string directory path to write to, graph with pageRank
+ * OUTPUT: void, should write the node #'s and their pageRanks
+ */
+void rank_write(std::string fp, tony::Graph page_rank_g);
 
 
 

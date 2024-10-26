@@ -4,3 +4,4 @@ apt-get update && \
         build-essential \
         g++  \
         make \
+        libboost-all-dev \
