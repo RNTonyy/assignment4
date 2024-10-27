@@ -1,14 +1,12 @@
+#ifndef __DIMACIO_H__
+#define __DIMACIO_H__
+
+
 #include <iostream>
 #include <fstream>
+#include "Graph.h"
 
-/**
-    READ:
-    1) take a given file path in string and open the file into fstream object
-    2) call constructor for Graph() passing in metadata
-    3) loop through line by line and add edges to CSR
-    4) return Graph
-
-
+/** 
     WRITE: DIMAC
     1) be given a string file path and make a file write object (fstream)
     2) Iterate through the CSR and put into DIMAC format
@@ -31,12 +29,20 @@
         - For finished PageRank, node labels will have rankings rather than weights now
 
         - std::cout << "NODE# PageRank"
-            
-    
-        
  */
 
+ /**
+    READ:
+    1) take a given file path in string and open the file into fstream object
+    2) call constructor for Graph() passing in metadata
+    3) loop through line by line and add edges to CSR
+    4) return Graph
 
+*/
+tony::Graph dimac_read(std::string fp);
 
+void dimac_write(std::string fp, tony::Graph g);
+
+#endif
 
 

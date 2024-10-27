@@ -5,10 +5,12 @@
 
 using namespace tony;
 
-
-Graph::Graph(int num_nodes, int num_edges) : num_nodes(num_nodes), 
-    num_edges(num_edges), 
+Graph::Graph(int num_nodes, int num_edges, std::string format) : num_nodes(num_nodes), 
+    num_edges(num_edges),
+    format(format), 
     edges(std::vector<std::tuple<int, int, int>>()) {}
+
+Graph::~Graph(){};
 
 
 void Graph::add_edge(int src, int dst, int val){

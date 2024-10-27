@@ -1,3 +1,7 @@
+#ifndef __GRAPH_H__
+#define __GRAPH_H__
+
+
 #include <iostream>
 #include <vector>
 #include <fstream>
@@ -61,7 +65,7 @@
             INPUT: fstream
             OUTPUT: Graph object with populated COO
          */
-        Graph(int num_nodes, int num_edges);   
+        Graph(int num_nodes, int num_edges, std::string format);   
         /*
             Plan for how to create COO
 
@@ -105,3 +109,4 @@
  };
 
 
+#endif
