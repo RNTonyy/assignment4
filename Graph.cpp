@@ -1,5 +1,6 @@
 #include <boost/graph/compressed_sparse_row_graph.hpp>
 #include <iostream>
+#include <tuple>
 #include <vector>
 #include "Graph.h"
 
@@ -40,6 +41,28 @@ int edge_exist(std::vector<std::tuple<int,int,int>> edges, int src, int dst){
 void Graph::create_csr(){
     BoostCSR csr(boost::edges_are_unsorted_multi_pass, edges.begin(), edges.end(), num_nodes);
     
+}
+
+int Graph::get_num_nodes(){
+    return num_nodes;
+}
+
+int Graph::get_out_degree(int v){
+    return boost:out_degree(v, csr);
+}
+
+bool isLinked(int v, int u, const std::vector<int>& row_ptrs, const std::vector<int>& col_indices) {
+    // Get the start and end index for vertex v's outgoing edges
+    int start = row_ptrs[v];
+    int end = row_ptrs[v + 1];
+
+    // Iterate over the outgoing edges for vertex v
+    for (int i = start; i < end; ++i) {
+        if (col_indices[i] == u) {
+            return true; // Vertex v is linked to vertex u
+        }
+    }
+    return false; // No link found
 }
 
 

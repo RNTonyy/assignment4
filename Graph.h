@@ -53,6 +53,7 @@
         std::string format;
         BoostCSR csr;
         std::vector<std::tuple<int, int, int>> edges;
+        
     
     
     public:
@@ -98,6 +99,14 @@
         //static method gets called and creates a Graph object
 
         //
+
+        int get_num_nodes();
+
+
+        int get_out_degree(int v);
+        bool isLinked(int u, int v);
+
+
 
 
 
